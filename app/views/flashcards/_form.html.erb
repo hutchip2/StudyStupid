@@ -1,0 +1,21 @@
+
+<%= form_for(@flashcard) do |f| %>
+  <% if @flashcard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@flashcard.errors.count, "error") %> prohibited this flashcard from being saved:</h2>
+
+      <ul>
+      <% @flashcard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+Front: <%= f.text_field :front %><br />
+ Back: <%= f.text_field :back  %><br />
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

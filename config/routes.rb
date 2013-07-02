@@ -1,5 +1,11 @@
 Studystupid::Application.routes.draw do
 
+  resources :decks
+
+
+  resources :flashcards
+
+
 #  namespace :admin do
 #    resources :resumes
 #  end

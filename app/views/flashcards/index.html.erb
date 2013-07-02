@@ -1,0 +1,46 @@
+<h1>Listing flashcards</h1>
+
+<br />
+
+<%= link_to 'New Deck', new_deck_path %>
+
+<br />
+<br />
+
+<body>
+  <center><canvas id="card"></canvas></center>
+  <br/>
+  <hr>
+</body>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% i = 0 %>  
+<% @decks.each do |deck| %>
+<!--  <b>Title:</b> <%= deck.title %> -->
+  <canvas class="decks" id="deck"></canvas>
+      <script>
+        var canvas = document.getElementById('deck');
+        var context = canvas.getContext('2d');
+        var x = canvas.width / 4;
+        var y = canvas.height / 2;
+        var title = deck.title;
+        context.font = '20pt Calibri';
+        context.fillStyle = 'blue';
+        context.fillText(title, x, y);
+      </script>
+      <% i+=1 %>
+  <tr>
+    <td><%= link_to 'Show', deck %></td>
+    <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
+    <td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<br />
