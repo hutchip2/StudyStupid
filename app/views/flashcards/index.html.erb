@@ -9,16 +9,25 @@
 
 <body>
   <center><canvas id="card"></canvas></center>
+    <script>
+      var canvas = document.getElementById("card");
+      var context = canvas.getContext('2d');
+      var x = canvas.width / 4;
+      var y = canvas.height / 2;
+      context.font = '20pt Calibri';
+      context.fillStyle = 'blue';
+      context.fillText("current card", x, y);
+    </script>
   <br/>
   <hr>
 </body>
-
+<div id="decks_outer">
 <table>
-  <tr>
+  <tc>
     <th></th>
     <th></th>
-    <th></th>
-  </tr>
+    <th class="destroy"></th>
+  </tc>
 <% i = 0 %>  
 <% @decks.each do |deck| %>
 <!--  <b>Title:</b> <%= deck.title %> -->
@@ -28,19 +37,19 @@
         var context = canvas.getContext('2d');
         var x = canvas.width / 4;
         var y = canvas.height / 2;
-        var title = "<%= deck.title %>";
+        var title = "<%= deck.title%>";
         context.font = '20pt Calibri';
         context.fillStyle = 'blue';
         context.fillText(title, x, y);
       </script>
-      <% i+=1 %>
-  <tr>
+<% i+=1 %>
+  <tc>
     <td><%= link_to 'Show', deck %></td>
     <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
     <td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  </tc>
 <% end %>
 </table>
-
+</div>
 
 <br />

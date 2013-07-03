@@ -3,14 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #card {
-  width:60%;
-  height:width/2;
-  border:2px solid #000000;
+  width: 60%;
+  height: width/2;
+  border: 2px solid #000000;
 }
 
 .decks {
-  width:15%;
-  height:width/2;
-  border:2px solid #000000;
-  margin:0em 1em 0em 1em;
+  width: 15%;
+  height: width/2;
+  border: 2px solid #000000;
+  margin: 0em 1em 0em 1em;
+}
+
+#decks_outer {
+  white-space:nowrap;
+  overflow: auto;
+  overflow-y: hidden;
+  -ms-overflow-y: hidden;
 }
