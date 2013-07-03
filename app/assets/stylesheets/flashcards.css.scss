@@ -2,17 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#card {
-  width: 60%;
-  height: width/2;
-  border: 2px solid #000000;
-}
-
 .decks {
   width: 15%;
   height: width/2;
   border: 2px solid #000000;
   margin: 0em 1em 0em 1em;
+}
+
+#card {
+  width: 60%;
+  height: width/2;
+  border: 2px solid #000000;
 }
 
 #decks_outer {

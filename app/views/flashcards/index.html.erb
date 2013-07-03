@@ -26,11 +26,14 @@
   <tc>
     <th></th>
     <th></th>
-    <th class="destroy"></th>
+    <th></th>
   </tc>
 <% i = 0 %>  
 <% @decks.each do |deck| %>
-<!--  <b>Title:</b> <%= deck.title %> -->
+<tc>
+  <td><%= link_to 'Show', deck %></td>
+  <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
+  <td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %>&#8195;&#8195;&#8195;&#8195;&#8195;&#8195;&#8195;</td>
   <canvas class="decks" id="deck<%= i %>"></canvas>
       <script>
         var canvas = document.getElementById("deck<%= i %>");
@@ -41,13 +44,10 @@
         context.font = '20pt Calibri';
         context.fillStyle = 'blue';
         context.fillText(title, x, y);
+        canvas.onclick = function() { alert("Selected " + "<%= deck.title %>"); }
       </script>
+</tc>
 <% i+=1 %>
-  <tc>
-    <td><%= link_to 'Show', deck %></td>
-    <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
-    <td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tc>
 <% end %>
 </table>
 </div>
