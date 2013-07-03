@@ -22,13 +22,13 @@
 <% i = 0 %>  
 <% @decks.each do |deck| %>
 <!--  <b>Title:</b> <%= deck.title %> -->
-  <canvas class="decks" id="deck"></canvas>
+  <canvas class="decks" id="deck<%= i %>"></canvas>
       <script>
-        var canvas = document.getElementById('deck');
+        var canvas = document.getElementById("deck<%= i %>");
         var context = canvas.getContext('2d');
         var x = canvas.width / 4;
         var y = canvas.height / 2;
-        var title = deck.title;
+        var title = "<%= deck.title %>";
         context.font = '20pt Calibri';
         context.fillStyle = 'blue';
         context.fillText(title, x, y);
