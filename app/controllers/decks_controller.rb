@@ -1,2 +1,2 @@
-class DecksController < InheritedResources::Base
+class DecksController < InheritedResources::Base  
 end

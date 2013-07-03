@@ -41,6 +41,12 @@ class DeviseCreateAccounts < ActiveRecord::Migration
       ## Token authenticatable
       t.string :authentication_token
 
+
+
+      t.integer :current_deck
+
+
+
       t.timestamps
     end
 

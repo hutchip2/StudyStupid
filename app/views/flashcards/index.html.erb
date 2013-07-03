@@ -44,7 +44,7 @@
         context.font = '20pt Calibri';
         context.fillStyle = 'blue';
         context.fillText(title, x, y);
-        canvas.onclick = function() { alert("Selected " + "<%= deck.title %>"); }
+        canvas.onclick = function() { alert("Selected " + "<% Account::current_deck = deck.id %>"); }
       </script>
 </tc>
 <% i+=1 %>
