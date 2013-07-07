@@ -7,6 +7,6 @@ class Account < ActiveRecord::Base
 
   has_many :decks, :dependent => :destroy
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :role, :password, :password_confirmation, :remember_me
 
 end

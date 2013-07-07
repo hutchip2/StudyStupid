@@ -2,8 +2,11 @@ ActiveAdmin.register Account do
 
   menu :priority => 2
 
+  controller { with_role :admin }
+
   index do
     column :email
+    column :role
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
@@ -11,6 +14,7 @@ ActiveAdmin.register Account do
   end
 
   filter :email
+  filter :role
 
   form do |f|
     f.inputs "Account Details" do

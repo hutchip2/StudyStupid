@@ -1,5 +1,8 @@
 ActiveAdmin.register Flashcard do
+
   menu :priority => 4
+
+  controller { with_role :admin }
 
   index do
     column :front

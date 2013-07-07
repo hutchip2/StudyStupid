@@ -1,5 +1,8 @@
 ActiveAdmin.register Deck do
+
   menu :priority => 3
+
+  controller { with_role :admin }
 
   index do
     column :title
