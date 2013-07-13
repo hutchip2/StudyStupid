@@ -47,6 +47,14 @@ ActiveAdmin.setup do |config|
   # This will ONLY change the title for the admin section. Other
   # namespaces will continue to use the main "site_title" configuration.
 
+  # This block will edit the default menu
+  config.namespace :admin do |admin|
+    admin.build_menu do |menu|
+      #menu.add :label => "Interactives", :priority => 6
+      #menu.add :label => "Devices", :priority => 7
+    end
+  end
+
   # == User Authentication
   #
   # Active Admin will automatically call an authentication
@@ -55,7 +63,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # within the controller.
-  config.authentication_method = :authenticate_account!
+  config.authentication_method = :auth_for_admin!
 
 
   # == Current User
@@ -84,7 +92,13 @@ ActiveAdmin.setup do |config|
   # link. For example :get, :delete, :put, etc..
   #
   # Default:
-  # config.logout_link_method = :get
+  config.logout_link_method = :delete
+
+  # == Authorization Adapter
+  # Use cancan
+  # http://activeadmin.info/docs/13-authorization-adapter.html
+  config.authorization_adapter = ActiveAdmin::CanCanAdapter
+  #config.cancan_ability_class = "MyCustomAbility"
 
   # == Root
   #
@@ -195,7 +209,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  # config.default_per_page = 30
+  config.default_per_page = 30
 
 
   # == Filters
@@ -204,7 +218,7 @@ ActiveAdmin.setup do |config|
   # hand side with a filter for each attribute of the registered model.
   # You can enable or disable them for all resources here.
   #
-  # config.filters = true
+  config.filters = true
 
 
 end
