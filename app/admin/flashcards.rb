@@ -5,6 +5,7 @@ ActiveAdmin.register Flashcard do
   controller { with_role :admin }
 
   index do
+    column :id
     column :front
     column :back
     column :deck
@@ -22,6 +23,21 @@ ActiveAdmin.register Flashcard do
       f.input :deck
     end
     f.actions
+  end
+
+  controller do
+
+      before_filter :get_decks
+      def get_decks
+        @decks = Deck.all
+      end
+
+    #  before_filter :get_fcs
+      def get_flashcards
+        @flashcards = Flashcard.find(:all, :conditions => { :deck_id => params[:deck_id] })
+      end
+      helper_method :get_flashcards
+
   end
 
 end

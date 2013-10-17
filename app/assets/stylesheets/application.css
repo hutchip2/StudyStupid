@@ -11,3 +11,17 @@
  *= require_self
  *= require_tree .
  */
+
+footer {
+  margin-left: 150px;
+  margin-right: 150px;
+  text-align: center;
+}
+
+#site_title {
+  color: red;
+}
+
+.decks:hover {
+  border-color: red;
+}

@@ -9,15 +9,77 @@
   margin: 0em 1em 0em 1em;
 }
 
+.show, .edit, .destroy {
+  width: 20px;
+  height: 20px;
+  margin-left: 18px;
+  border: 1px solid #000000;
+}
+
+.show {
+  margin-left: 18px;
+}
+
+.show:hover {
+  background-color: red;
+}
+
+.edit {
+  margin-left: 45px;
+}
+
+.edit:hover {
+  background-color: green;
+}
+
+.destroy {
+  margin-left: 72px;
+}
+
+.destroy:hover {
+  background-color: blue;
+}
+
+#newDeck {
+  margin-left: 65px;
+}
+
+#button_left, #button_right {
+  color: blue;
+}
+
+#button_left {
+  margin-top: 50px;
+  margin-left: 10px;
+  float: left;
+  font-size: 50px;
+}
+
+#button_right {
+  margin-top: 50px;
+  margin-right: 10px;
+  float: right;
+  font-size: 50px;
+}
+
 #card {
-  width: 60%;
+  width: 49%;
   height: width/2;
   border: 2px solid #000000;
 }
 
 #decks_outer {
+  height: 103px;
   white-space:nowrap;
   overflow: auto;
   overflow-y: hidden;
   -ms-overflow-y: hidden;
+}
+
+#flashcards, #accounts {
+  float: right;
+}
+
+#flashcards {
+  margin-right: 150px;
 }

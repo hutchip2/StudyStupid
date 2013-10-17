@@ -26,6 +26,34 @@
   width:100%;
 }
 
-h1{
-  background-color: red;
+h1, #greeting{
+  color: red;
+  float: left;
+  margin-left: 150px;
 }
+
+#flashcards, #accounts {
+  float: right;
+}
+
+#flashcards {
+  margin-right: 150px;
+}
+
+h2 a {
+
+}
+
+.notFirst {
+  margin-right: 10px;
+}
+
+.sign_in_out {
+  float:right;
+  margin-right: 150px;
+}
+
+#greeting {
+  color: black;
+}
+

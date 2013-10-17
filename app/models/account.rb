@@ -9,10 +9,11 @@ class Account < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :decks, :dependent => :destroy
+  has_many :flashcards, :through => :decks
 
   validates :role, :presence => true, :inclusion => { :in => ALLOWED_ROLES, :message => 'is not a valid role' }
 
-  attr_accessible :email, :role, :password, :password_confirmation, :remember_me, :as => [:default, :admin]
+  attr_accessible :current_deck_id, :first_name, :last_name, :email, :role, :password, :password_confirmation, :remember_me, :as => [:default, :admin]
 
   #### Instance Methods ####
 
@@ -22,6 +23,14 @@ class Account < ActiveRecord::Base
 
   def user?
     self.role.eql?('user')
+  end
+
+  def get_current_deck
+    self.current_deck
+  end
+  
+  def set_current_deck
+    
   end
 
 end

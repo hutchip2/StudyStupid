@@ -11,6 +11,9 @@ class DeviseCreateAccounts < ActiveRecord::Migration
       t.string :role,               :null => false, :default => "admin"
       t.string :email,              :null => false, :default => ""
       t.string :encrypted_password, :null => false, :default => ""
+      t.string  :first_name,        :null => false, :default => ""
+      t.string  :last_name,         :null => false, :default => ""
+      t.integer :current_deck_id,                   :default => 1
 
       ## Recoverable
       t.string   :reset_password_token
@@ -40,12 +43,6 @@ class DeviseCreateAccounts < ActiveRecord::Migration
 
       ## Token authenticatable
       t.string :authentication_token
-
-
-
-      t.integer :current_deck
-
-
 
       t.timestamps
     end

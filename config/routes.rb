@@ -65,6 +65,13 @@ Studystupid::Application.routes.draw do
   root :to => 'index#index'
   devise_for :accounts, :controllers => { :omniauth_callbacks => "accounts/omniauth_callbacks" }
 
+  get '/about', to: 'index#about'
+  get '/contact', to: 'index#contact'
+  get '/help', to: 'index#help'
+
+
+  # config/routes.rb
+
   # Admin
   ActiveAdmin.routes(self)
 

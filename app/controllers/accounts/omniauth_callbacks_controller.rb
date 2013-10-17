@@ -2,6 +2,15 @@
 class Accounts::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #skip_before_filter :verify_authenticity_token, only: :ldap
 
+
+
+  def set_current_deck(deck_id)
+    self.current_deck_id = deck_id
+    self.save!
+  end
+
+
+
   def ldap
     auth = request.env['omniauth.auth']
     link_providor_or_sign_in(auth, 'Miami Login', true) # trust that miami emails are verified

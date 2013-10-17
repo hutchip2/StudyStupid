@@ -8,6 +8,7 @@ protected
   def current_user
     current_account
   end
+  helper_method :current_user
 
   def current_ability
     @current_ability ||= Ability.new(current_account)

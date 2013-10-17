@@ -17,6 +17,9 @@ ActiveRecord::Schema.define(:version => 20130628204216) do
     t.string   "role",                   :default => "admin", :null => false
     t.string   "email",                  :default => "",      :null => false
     t.string   "encrypted_password",     :default => "",      :null => false
+    t.string   "first_name",             :default => "",      :null => false
+    t.string   "last_name",              :default => "",      :null => false
+    t.integer  "current_deck_id",        :default => 1
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -34,7 +37,6 @@ ActiveRecord::Schema.define(:version => 20130628204216) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.integer  "current_deck"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
   end
@@ -47,8 +49,10 @@ ActiveRecord::Schema.define(:version => 20130628204216) do
 
   create_table "decks", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "account_id"
+    t.integer  "current_flashcard_id", :default => 1
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "flashcards", :force => true do |t|

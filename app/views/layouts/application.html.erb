@@ -7,10 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+  <% if current_page?(root_path) %>
+    <a id='greeting'>
+      <% if current_user != nil %>
+        Welcome, <%= current_user.first_name %>!
+      <% else %>
+        Sign in or create and account to begin!
+      <% end %>
+    </a>
+  <% end %><br/>
+  <h1><a href="/" id="site_title">StudyStupid</a></h1>
+  <%= link_to_if(account_signed_in?, 'Sign out', destroy_account_session_path, :method => :delete, :class => 'sign_in_out') { link_to('Sign in', new_account_session_path, :class => 'sign_in_out') } %>
+  <br/>
+  <a id="flashcards" href="/flashcards">Flashcards</a>
+  <a id="accounts" class='notFirst' href="/admin/accounts">Account</a>
 
-<%= link_to_if(account_signed_in?, 'Sign out', destroy_account_session_path, :method => :delete) { link_to('Sign in', new_account_session_path) } %>
 <%= flash_messages :p, :notice, :alert %>
 <%= yield %>
 
 </body>
+
+<footer>
+  <%= link_to("About", "/about") %>
+  <%= link_to("Contact", "/contact") %>
+  <%= link_to("Help", "/help") %>
+</footer>
+
 </html>

@@ -1,55 +1,163 @@
-<h1>Listing flashcards</h1>
 
 <br />
-
-<%= link_to 'New Deck', new_deck_path %>
-
+<hr>
 <br />
-<br />
-
 <body>
   <center><canvas id="card"></canvas></center>
-    <script>
-      var canvas = document.getElementById("card");
-      var context = canvas.getContext('2d');
-      var x = canvas.width / 4;
-      var y = canvas.height / 2;
-      context.font = '20pt Calibri';
-      context.fillStyle = 'blue';
-      context.fillText("current card", x, y);
-    </script>
-  <br/>
+  <br />
   <hr>
 </body>
-<div id="decks_outer">
-<table>
+<%= link_to 'New Deck', new_deck_path, :id => 'newDeck' %>
+<br /><br />
+
+<div id="button_left"> <</div>
+<div id="button_right">></div>
+
+<div id="decks_outer" style="position: relative;">
+  <table>
+    <tc>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tc>
+  <% current_card_id = 1%>
+  <% i = 0 %>  
+  <% @decks.each do |deck| %>
   <tc>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tc>
-<% i = 0 %>  
-<% @decks.each do |deck| %>
-<tc>
-  <td><%= link_to 'Show', deck %></td>
-  <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
-  <td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %>&#8195;&#8195;&#8195;&#8195;&#8195;&#8195;&#8195;</td>
-  <canvas class="decks" id="deck<%= i %>"></canvas>
-      <script>
-        var canvas = document.getElementById("deck<%= i %>");
-        var context = canvas.getContext('2d');
-        var x = canvas.width / 4;
-        var y = canvas.height / 2;
-        var title = "<%= deck.title%>";
-        context.font = '20pt Calibri';
-        context.fillStyle = 'blue';
-        context.fillText(title, x, y);
-        canvas.onclick = function() { alert("Selected " + "<% Account::current_deck = deck.id %>"); }
-      </script>
-</tc>
-<% i+=1 %>
-<% end %>
-</table>
+    <canvas class="decks"  id="deck<%= i %>"    style="position: absolute; left: <%= 220 * i %>px; top: 0;    z-index: 0;"></canvas>
+    <canvas class="show"   id="show<%= i %>"    style="position: absolute; left: <%= 220 * i %>px; top: 75px; z-index: 1;"></canvas>
+    <canvas class="edit"   id="edit<%= i %>"    style="position: absolute; left: <%= 220 * i %>px; top: 75px; z-index: 1;"></canvas>
+    <canvas class="destroy"id="destroy<%= i %>" style="position: absolute; left: <%= 220 * i %>px; top: 75px; z-index: 1;"></canvas>
+
+    <script>
+      var show     = document.getElementById("show<%= i %>");
+      var edit     = document.getElementById("edit<%= i %>");
+      var destroy  = document.getElementById("destroy<%= i %>");
+
+      var showctx     =    show.getContext('2d');
+      var editctx     =    edit.getContext('2d');
+      var destroyctx  = destroy.getContext('2d');
+
+      showctx.font = '150pt Calibri';
+      showctx.fillStyle = 'black';
+      showctx.fillText('S', show.width/3, show.height);
+
+      editctx.font = '150pt Calibri';
+      editctx.fillStyle = 'black';
+      editctx.fillText('E', edit.width/3, edit.height);
+
+      destroyctx.font = '150pt Calibri';
+      destroyctx.fillStyle = 'black';
+      destroyctx.fillText('D', destroy.width/3, destroy.height);
+
+      show.onclick = function() {
+        window.location = "/decks/<%=deck.id%>";
+      }
+      edit.onclick = function() {
+        window.location = "/decks/<%=deck.id%>/edit";
+      }
+      destroy.onclick = function() {
+        //window.location = "/decks/<%=deck.id%>";
+        //<td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      }
+
+      var card    = document.getElementById("card");
+      var context = card.getContext('2d');
+
+      context.lineWidth = 1;
+      for (var i = 1; i < 10; i++) {
+        context.beginPath();
+        context.moveTo(0,15*i);
+        context.lineTo(300,15*i);
+        if (i == 1) {
+          context.strokeStyle = '#c6757e';
+        } else {
+          context.strokeStyle = '#a0d6dd';
+        }
+        context.stroke();
+      }
+
+      var canvas  = document.getElementById("deck<%= i %>");
+      var context = canvas.getContext('2d');
+      var x = canvas.width / 3;
+      var y = canvas.height / 2;
+      context.lineWidth = 1;
+      for (var i = 1; i < 10; i++) {
+        context.beginPath();
+        context.moveTo(0,15*i);
+        context.lineTo(300,15*i);
+        if (i == 1) {
+          context.strokeStyle = '#c6757e';
+        } else {
+          context.strokeStyle = '#a0d6dd';
+        }
+        context.stroke();
+      }
+      var title = "<%= deck.title %>";
+      context.font = '20pt Calibri';
+      context.fillStyle = 'blue';
+      context.fillText(title, x, y);
+      //context.fillText('S  E  D', x-80, y+60);
+
+      canvas  = document.getElementById("deck<%= i %>");
+      context = canvas.getContext('2d');
+
+      //canvas.onclick = deckClick;
+      canvas.onclick = function() {
+        "<% current_user.update_attributes(:current_deck_id => deck.id) %>"
+        "<% current_user.current_deck_id = deck.id %>"
+        "<% @fcs = Flashcard.find(:all, :conditions => { :deck_id => current_user.current_deck_id }) %>"
+        window.current_deck_id = "<%= deck.id %>";
+        window.flashcards = new Array();
+        "<% @fcs.each do |f| %>"
+          window.flashcards.push("<%= f.front %>");
+          window.flashcards.push("<%= f.back %>");
+        "<% end %>"
+        var curCard;
+        "<% if @fcs.empty? %>"
+          curCard = "<empty>"
+        "<% else %>"
+          curCard = "<%= @fcs.first.front %>"
+        "<% end %>"
+        var cardCanvas = document.getElementById("card");
+        cardCanvas.width = cardCanvas.width;
+        var cardContext = cardCanvas.getContext('2d');
+        cardContext.lineWidth = 2;
+        for (var i = 1; i < 10; i++) {
+          cardContext.beginPath();
+          cardContext.moveTo(0,15*i);
+          cardContext.lineTo(300,15*i);
+          if (i == 1) {
+            cardContext.strokeStyle = '#c6757e';
+          } else {
+            cardContext.strokeStyle = '#a0d6dd';
+          }
+          cardContext.stroke();
+        }
+        var x = cardCanvas.width / 3;
+        var y = cardCanvas.height / 2;
+        cardContext.font = '20pt Calibri';
+        cardContext.fillStyle = 'blue';
+        cardContext.fillText(curCard, x, y);
+        "<% j = 0 %>"
+        "<% @decks.each do |d| %>"
+          if (window.current_deck_id == '<%= d.id %>') {
+            $('#deck<%= j %>').css('background-color', 'lightblue');              
+          } else {
+            $('#deck<%= j %>').css('background-color', 'white');
+          }
+          "<% j = j + 1 %>"
+        "<% end %>"
+      }
+    </script>
+
+    </tc>
+
+    <% i+=1 %>
+    <% end %>
+
+  </table>
+
 </div>
 
 <br />
