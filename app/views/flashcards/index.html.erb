@@ -13,6 +13,14 @@
 <div id="button_left"> <</div>
 <div id="button_right">></div>
 <div id="deckCount" style="display: none;"><%= @decks.count %></div>
+<div id="deckTitles" style="display: none;">
+  <% titles = [] %>
+  <% @decks.each do |deck| %>
+    <% titles.push(deck.title) %>
+  <% end %>
+  <%= titles %>
+</div>
+
 <div id="decks_outer">
   <table>
     <tc>
@@ -30,49 +38,8 @@
     <canvas class="destroy"id="destroy<%= i %>" style="left: <%= 220 * i %>px;"></canvas>
 
     <script>
-
-      var card    = document.getElementById("card");
-      var context = card.getContext('2d');
-
-      context.lineWidth = 1;
-      for (var i = 1; i < 10; i++) {
-        context.beginPath();
-        context.moveTo(0,15*i);
-        context.lineTo(300,15*i);
-        if (i == 1) {
-          context.strokeStyle = '#c6757e';
-        } else {
-          context.strokeStyle = '#a0d6dd';
-        }
-        context.stroke();
-      }
-
-      var canvas  = document.getElementById("deck<%= i %>");
-      var context = canvas.getContext('2d');
-      var x = canvas.width / 3;
-      var y = canvas.height / 2;
-      context.lineWidth = 1;
-      for (var i = 1; i < 10; i++) {
-        context.beginPath();
-        context.moveTo(0,15*i);
-        context.lineTo(300,15*i);
-        if (i == 1) {
-          context.strokeStyle = '#c6757e';
-        } else {
-          context.strokeStyle = '#a0d6dd';
-        }
-        context.stroke();
-      }
-      var title = "<%= deck.title %>";
-      context.font = '20pt Calibri';
-      context.fillStyle = 'blue';
-      context.fillText(title, x, y);
-      //context.fillText('S  E  D', x-80, y+60);
-
       canvas  = document.getElementById("deck<%= i %>");
       context = canvas.getContext('2d');
-
-      //canvas.onclick = deckClick;
       canvas.onclick = function() {
         "<% current_user.update_attributes(:current_deck_id => deck.id) %>"
         "<% current_user.current_deck_id = deck.id %>"
@@ -92,18 +59,7 @@
         var cardCanvas = document.getElementById("card");
         cardCanvas.width = cardCanvas.width;
         var cardContext = cardCanvas.getContext('2d');
-        cardContext.lineWidth = 2;
-        for (var i = 1; i < 10; i++) {
-          cardContext.beginPath();
-          cardContext.moveTo(0,15*i);
-          cardContext.lineTo(300,15*i);
-          if (i == 1) {
-            cardContext.strokeStyle = '#c6757e';
-          } else {
-            cardContext.strokeStyle = '#a0d6dd';
-          }
-          cardContext.stroke();
-        }
+        drawFlashcardLines(cardContext,2);
         var x = cardCanvas.width / 3;
         var y = cardCanvas.height / 2;
         cardContext.font = '20pt Calibri';

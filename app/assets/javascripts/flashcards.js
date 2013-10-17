@@ -3,14 +3,30 @@
 //# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready(function() {
-  makeFlashcardCanvas();
+  buildDecks();
+  buildFlashcardCanvas();
   buildShowEditDestroy();
   buildLeftScroll();
   buildRightScroll();
   flipFlashcard();
 });
 
-function makeFlashcardCanvas() {
+function drawFlashcardLines(context, width) {
+  context.lineWidth = width;
+  for (var i = 1; i < 10; i++) {
+    context.beginPath();
+    context.moveTo(0,15*i);
+    context.lineTo(300,15*i);
+    if (i == 1) {
+      context.strokeStyle = '#c6757e';
+    } else {
+      context.strokeStyle = '#a0d6dd';
+    }
+    context.stroke();
+  }
+}
+
+function buildFlashcardCanvas() {
   window.flashcards = new Array();
   window.current_card = 0;
   var canvas = document.getElementById("card");
@@ -22,8 +38,26 @@ function makeFlashcardCanvas() {
   context.fillText("Flashcards", x, y);
 }
 
+function buildDecks() {
+  var deckTitles = $('#deckTitles').text().split(',');
+  for (var i = 0; i < deckTitles.length; i++) {
+    var card    = document.getElementById("card");
+    var context = card.getContext('2d');
+    drawFlashcardLines(context,1);
+    var canvas  = document.getElementById("deck"+i);
+    var context = canvas.getContext('2d');
+    var x = canvas.width / 3;
+    var y = canvas.height / 2;
+    drawFlashcardLines(context,1);
+    var title = deckTitles[i];
+    context.font = '20pt Calibri';
+    context.fillStyle = 'blue';
+    context.fillText(title, x, y);
+  }
+}
+
 function buildShowEditDestroy() {
-  var deckCount = parseInt($('#deckCount').text(), 10);
+  var deckCount = $('#deckTitles').text().split(',').length;
   for (var i = 0; i < deckCount; i++) {
     var show     = document.getElementById("show"+i);
     var edit     = document.getElementById("edit"+i);
