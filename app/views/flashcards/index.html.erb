@@ -12,7 +12,6 @@
 
 <div id="button_left"> <</div>
 <div id="button_right">></div>
-<div id="deckCount" style="display: none;"><%= @decks.count %></div>
 <div id="decks_outer">
   <table>
     <tc>
@@ -30,7 +29,34 @@
     <canvas class="destroy"id="destroy<%= i %>" style="left: <%= 220 * i %>px;"></canvas>
 
     <script>
-
+      var show     = document.getElementById("show<%=i%>");
+      var edit     = document.getElementById("edit<%=i%>");
+      var destroy  = document.getElementById("destroy<%=i%>");
+      
+      var showctx     =    show.getContext('2d');
+      var editctx     =    edit.getContext('2d');
+      var destroyctx  = destroy.getContext('2d');
+      
+      showctx.font = '150pt Calibri';
+      showctx.fillStyle = 'black';
+      showctx.fillText('S', show.width/3, show.height);
+      editctx.font = '150pt Calibri';
+      editctx.fillStyle = 'black';
+      editctx.fillText('E', edit.width/3, edit.height);
+      destroyctx.font = '150pt Calibri';
+      destroyctx.fillStyle = 'black';
+      destroyctx.fillText('D', destroy.width/3, destroy.height);
+      show.onclick = function() {
+        window.location = "/decks/<%= deck.id %>";
+      }
+      edit.onclick = function() {
+        window.location = "/decks/<%= deck.id %>/edit";
+      }
+      destroy.onclick = function() {
+        //window.location = "/decks/<%=deck.id%>";
+        //<td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      }
+    
       var card    = document.getElementById("card");
       var context = card.getContext('2d');
 

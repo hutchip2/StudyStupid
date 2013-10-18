@@ -4,7 +4,6 @@
 
 $(document).ready(function() {
   makeFlashcardCanvas();
-  buildShowEditDestroy();
   buildLeftScroll();
   buildRightScroll();
   flipFlashcard();
@@ -20,37 +19,6 @@ function makeFlashcardCanvas() {
   context.font = '20pt Calibri';
   context.fillStyle = 'blue';
   context.fillText("Flashcards", x, y);
-}
-
-function buildShowEditDestroy() {
-  var deckCount = parseInt($('#deckCount').text(), 10);
-  for (var i = 0; i < deckCount; i++) {
-    var show     = document.getElementById("show"+i);
-    var edit     = document.getElementById("edit"+i);
-    var destroy  = document.getElementById("destroy"+i);
-    var showctx     =    show.getContext('2d');
-    var editctx     =    edit.getContext('2d');
-    var destroyctx  = destroy.getContext('2d');
-    showctx.font = '150pt Calibri';
-    showctx.fillStyle = 'black';
-    showctx.fillText('S', show.width/3, show.height);
-    editctx.font = '150pt Calibri';
-    editctx.fillStyle = 'black';
-    editctx.fillText('E', edit.width/3, edit.height);
-    destroyctx.font = '150pt Calibri';
-    destroyctx.fillStyle = 'black';
-    destroyctx.fillText('D', destroy.width/3, destroy.height);
-    show.onclick = function() {
-      window.location = "/decks/"+i;
-    }
-    edit.onclick = function() {
-      window.location = "/decks/"+ i +"/edit";
-    }
-    destroy.onclick = function() {
-      //window.location = "/decks/<%=deck.id%>";
-      //<td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    }
-  }
 }
 
 function buildLeftScroll() {
