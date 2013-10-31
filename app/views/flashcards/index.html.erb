@@ -1,8 +1,8 @@
 
 <br />
-<hr>
-<br />
 <body>
+  <hr>
+  <br />
   <center><canvas id="card"></canvas></center>
   <br />
   <hr>
@@ -10,8 +10,8 @@
 <%= link_to 'New Deck', new_deck_path, :id => 'newDeck' %>
 <br /><br />
 
-<div id="button_left"> <</div>
-<div id="button_right">></div>
+<div id="button_left"> &#60;</div>
+<div id="button_right">&#62;</div>
 <div id="decks_outer">
   <table>
     <tc>
@@ -32,11 +32,11 @@
       var show     = document.getElementById("show<%=i%>");
       var edit     = document.getElementById("edit<%=i%>");
       var destroy  = document.getElementById("destroy<%=i%>");
-      
+
       var showctx     =    show.getContext('2d');
       var editctx     =    edit.getContext('2d');
       var destroyctx  = destroy.getContext('2d');
-      
+
       showctx.font = '150pt Calibri';
       showctx.fillStyle = 'black';
       showctx.fillText('S', show.width/3, show.height);
@@ -98,23 +98,30 @@
       canvas  = document.getElementById("deck<%= i %>");
       context = canvas.getContext('2d');
 
-      //canvas.onclick = deckClick;
       canvas.onclick = function() {
-        "<% current_user.update_attributes(:current_deck_id => deck.id) %>"
-        "<% current_user.current_deck_id = deck.id %>"
-        "<% @fcs = Flashcard.find(:all, :conditions => { :deck_id => current_user.current_deck_id }) %>"
+
+        // Start ruby code
+        window.decks = new Array();
+        "<% Deck.all.each do |d| %>"
+          window.decks.push("<%= d.id %>")
+        "<% end %>"
+
+        "<% @fcs = deck.flashcards %>"
         window.current_deck_id = "<%= deck.id %>";
+
         window.flashcards = new Array();
         "<% @fcs.each do |f| %>"
           window.flashcards.push("<%= f.front %>");
           window.flashcards.push("<%= f.back %>");
         "<% end %>"
+        // End ruby code
+
         var curCard;
-        "<% if @fcs.empty? %>"
-          curCard = "<empty>"
-        "<% else %>"
-          curCard = "<%= @fcs.first.front %>"
-        "<% end %>"
+        if (window.flashcards.length == 0) {
+          curCard = "<empty>";
+        } else {
+          curCard = window.flashcards[0];
+        }
         var cardCanvas = document.getElementById("card");
         cardCanvas.width = cardCanvas.width;
         var cardContext = cardCanvas.getContext('2d');
@@ -135,15 +142,15 @@
         cardContext.font = '20pt Calibri';
         cardContext.fillStyle = 'blue';
         cardContext.fillText(curCard, x, y);
-        "<% j = 0 %>"
-        "<% @decks.each do |d| %>"
-          if (window.current_deck_id == '<%= d.id %>') {
-            $('#deck<%= j %>').css('background-color', 'lightblue');              
+        var j = 0;
+        for (var i = 0; i < window.decks.length; i++) {
+          if (window.current_deck_id == window.decks[i]) {
+            $('#deck'+j).css('background-color', 'lightblue');              
           } else {
-            $('#deck<%= j %>').css('background-color', 'white');
+            $('#deck'+j).css('background-color', 'white');
           }
-          "<% j = j + 1 %>"
-        "<% end %>"
+          j++;
+        }
       }
     </script>
 
