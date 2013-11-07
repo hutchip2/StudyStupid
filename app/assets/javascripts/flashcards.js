@@ -4,8 +4,6 @@
 
 $(document).ready(function() {
   makeFlashcardCanvas();
-  buildLeftScroll();
-  buildRightScroll();
   flipFlashcard();
 });
 
@@ -19,36 +17,6 @@ function makeFlashcardCanvas() {
   context.font = '20pt Calibri';
   context.fillStyle = 'blue';
   context.fillText("Flashcards", x, y);
-}
-
-function buildLeftScroll() {
-  $('#button_left').each(function () {
-    var hovered = false;
-    var loop = window.setInterval(function () {
-      if (hovered) {
-        $("#button_left").css("color", "red");
-        var leftPos = $('#decks_outer').scrollLeft();
-        $('#decks_outer').animate({scrollLeft: leftPos - 50});
-      } else {
-        $("#button_left").css("color", "blue"); }
-    }, 500);
-    $(this).hover( function () { hovered = true; }, function () { hovered = false;} );
-  });
-}
-
-function buildRightScroll() {
-  $('#button_right').each(function () {
-    var hovered = false;
-    var loop = window.setInterval(function () {
-      if (hovered) {
-        $("#button_right").css("color", "red");
-        var leftPos = $('#decks_outer').scrollLeft();
-        $('#decks_outer').animate({scrollLeft: leftPos + 50});
-      } else {
-        $("#button_right").css("color", "blue"); }
-    }, 500);
-    $(this).hover( function () { hovered = true; }, function () { hovered = false;} );
-  });
 }
 
 function flipFlashcard() {

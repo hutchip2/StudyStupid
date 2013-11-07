@@ -4,26 +4,26 @@
 
 .decks {
   position: absolute;
-  top: 0;
+  bottom: 8%;
   z-index: 0;
-  width: 15%;
+  width: 200px;
   height: width/2;
-  border: 2px solid #000000;
+  border: 1px solid #000000;
   margin: 0em 1em 0em 1em;
 }
 
 .show, .edit, .destroy {
   position: absolute; 
-  top: 75px; 
+  top: 70%; 
   z-index: 1;
-  width: 20px;
-  height: 20px;
-  margin-left: 18px;
+  width: 2%;
+  height: width;
+  margin-left: 1%;
   border: 1px solid #000000;
 }
 
 .show {
-  margin-left: 18px;
+  margin-left: 1.5%;
 }
 
 .show:hover {
@@ -31,7 +31,7 @@
 }
 
 .edit {
-  margin-left: 45px;
+  margin-left: 3.5%;
 }
 
 .edit:hover {
@@ -39,48 +39,47 @@
 }
 
 .destroy {
-  margin-left: 72px;
+  margin-left: 5.5%;
 }
 
 .destroy:hover {
   background-color: blue;
 }
 
-#newDeck {
-  margin-left: 65px;
-}
-
-#button_left, #button_right {
-  color: blue;
-}
-
-#button_left {
-  margin-top: 50px;
-  margin-left: 10px;
-  float: left;
-  font-size: 50px;
-}
-
-#button_right {
-  margin-top: 50px;
-  margin-right: 10px;
-  float: right;
-  font-size: 50px;
-}
-
-#card {
-  width: 49%;
+#showDeck {
+  width: 20%;
   height: width/2;
   border: 2px solid #000000;
 }
 
+#newDeck {
+  position: fixed;
+  float: left;
+  bottom: 31%;
+  left: 1%;
+
+}
+
+#card {
+  position: fixed;
+  width: 50%;
+  height: width/2;
+  border: 1px solid #000000;
+  left: 25%;
+  top: 15%;
+}
+
 #decks_outer {
-  position: relative;
+  position: fixed;
   height: 103px;
+  width: 100%;
+  top: 70%;
   white-space:nowrap;
   overflow: auto;
   overflow-y: hidden;
   -ms-overflow-y: hidden;
+  background-color: yellow;
+  padding-bottom: 2%;
 }
 
 #flashcards, #accounts {

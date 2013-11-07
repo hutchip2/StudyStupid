@@ -12,10 +12,40 @@
  *= require_tree .
  */
 
+#index_photo{
+  height: 538px;
+}
+
+#header {
+  position: fixed;
+  z-index: 10;
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  height: 12%;
+  width: 100%;
+  background-color: lightblue;
+}
+
+#greeting {
+  background-color: red;
+  margin-bottom: -5px;
+}
+ 
+body {
+
+}
+ 
 footer {
-  margin-left: 150px;
-  margin-right: 150px;
+  position: fixed;
+  z-index: 0;
+  overflow: hidden;
+  bottom: 0px;
+  left: 0px;
+  height: 12%;
+  width: 100%;
   text-align: center;
+  background-color: lightblue;
 }
 
 #site_title {
@@ -25,3 +55,5 @@ footer {
 .decks:hover {
   border-color: red;
 }
+
+

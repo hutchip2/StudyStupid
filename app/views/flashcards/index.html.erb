@@ -1,28 +1,18 @@
 
-<br />
 <body>
-  <hr>
   <br />
   <center><canvas id="card"></canvas></center>
   <br />
-  <hr>
 </body>
 <%= link_to 'New Deck', new_deck_path, :id => 'newDeck' %>
 <br /><br />
 
-<div id="button_left"> &#60;</div>
-<div id="button_right">&#62;</div>
 <div id="decks_outer">
-  <table>
-    <tc>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tc>
+
   <% current_card_id = 1%>
   <% i = 0 %>  
   <% @decks.each do |deck| %>
-  <tc>
+
     <canvas class="decks"  id="deck<%= i %>"    style="left: <%= 220 * i %>px;"></canvas>
     <canvas class="show"   id="show<%= i %>"    style="left: <%= 220 * i %>px;"></canvas>
     <canvas class="edit"   id="edit<%= i %>"    style="left: <%= 220 * i %>px;"></canvas>
@@ -154,12 +144,11 @@
       }
     </script>
 
-    </tc>
+
 
     <% i+=1 %>
     <% end %>
 
-  </table>
 
 </div>
 
