@@ -9,15 +9,15 @@
 
   <div id="header">
   <% if current_page?(root_path) %>
-    <a id='greeting'>
+    <span id='greeting'>
       <% if current_user != nil %>
         Welcome, <%= current_user.first_name %>!
       <% else %>
         Sign in or create and account to begin!
       <% end %>
-    </a>
+    </span>
   <% end %><br/>
-  <h1><a href="/" id="site_title">StudyStupid</a></h1>
+
   <%= link_to_if(account_signed_in?, 'Sign out', destroy_account_session_path, :method => :delete, :class => 'sign_in_out') { link_to('Sign in', new_account_session_path, :class => 'sign_in_out') } %>
   <br/>
   <a id="flashcards" href="/flashcards">Flashcards</a>

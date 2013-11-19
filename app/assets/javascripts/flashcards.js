@@ -5,7 +5,22 @@
 $(document).ready(function() {
   makeFlashcardCanvas();
   flipFlashcard();
+  addDeckMenus();
 });
+
+function linkListener() {
+    var element = $('#list' + this.i);
+    element.slideToggle();
+    event.preventDefault();
+}
+
+function addDeckMenus () {
+    for (var i = 0; i < window.decks.length; ++i) {
+        var link = document.getElementById("dropdown"+i);
+        link.i = i;
+        link.onclick = linkListener;
+    }
+}
 
 function makeFlashcardCanvas() {
   window.flashcards = new Array();

@@ -12,8 +12,44 @@
  *= require_tree .
  */
 
+#dropdown {
+  z-index: 10;
+}
+
+#list {
+  position: relative;
+}
+
+#flashcards, #accounts {
+  float: right;
+}
+
+#flashcards {
+  margin-right: 250px;
+}
+
+#accounts {
+  margin-right: 150px;
+}
+
+#logo {
+  margin-top: -16px;
+  margin-left: 200px;
+}
+
+#logo:hover {
+  
+}
+
 #index_photo{
-  height: 538px;
+}
+
+#flashcards {
+  margin-left: -200px;
+}
+
+#accounts {
+  margin-right: 220px;
 }
 
 #header {
@@ -24,12 +60,12 @@
   left: 0px;
   height: 12%;
   width: 100%;
-  background-color: lightblue;
+  background-color: #000;
 }
 
 #greeting {
   background-color: red;
-  margin-bottom: -5px;
+  margin-top: 17px;
 }
  
 body {
@@ -42,10 +78,10 @@ footer {
   overflow: hidden;
   bottom: 0px;
   left: 0px;
-  height: 12%;
+  height: 6%;
   width: 100%;
   text-align: center;
-  background-color: lightblue;
+  background-color: #000;
 }
 
 #site_title {

@@ -2,50 +2,30 @@
 <body>
   <br />
   <center><canvas id="card"></canvas></center>
+
+<a href="/" id="dropdown">V</a><div id="list" style="display: block; display: none;"><%=image_tag("show.png")%><br/><%=image_tag("edit.png")%><br/><%=image_tag("destroy.png")%><br/></div>
+
+
   <br />
 </body>
 <%= link_to 'New Deck', new_deck_path, :id => 'newDeck' %>
 <br /><br />
 
 <div id="decks_outer">
-
   <% current_card_id = 1%>
   <% i = 0 %>  
   <% @decks.each do |deck| %>
 
-    <canvas class="decks"  id="deck<%= i %>"    style="left: <%= 220 * i %>px;"></canvas>
-    <canvas class="show"   id="show<%= i %>"    style="left: <%= 220 * i %>px;"></canvas>
-    <canvas class="edit"   id="edit<%= i %>"    style="left: <%= 220 * i %>px;"></canvas>
-    <canvas class="destroy"id="destroy<%= i %>" style="left: <%= 220 * i %>px;"></canvas>
+    <canvas class="decks"  id="deck<%= i %>"    style="left: <%= 220 * i %>px; z-index: -1;"></canvas>
+
+    <a href="/" class="dropdown" id="dropdown<%= i %>" style="position: absolute; left: <%= (220 * i)+20 %>px; top: 20px;">V</a><div class="list" id="list<%= i %>" style="display: block; display: none; position: absolute; left: <%= (220*i)+30 %>px; top: 20px;"><%=image_tag("show.png")%><br/><%=image_tag("edit.png")%><br/><%=image_tag("destroy.png")%><br/></div>
 
     <script>
-      var show     = document.getElementById("show<%=i%>");
-      var edit     = document.getElementById("edit<%=i%>");
-      var destroy  = document.getElementById("destroy<%=i%>");
-
-      var showctx     =    show.getContext('2d');
-      var editctx     =    edit.getContext('2d');
-      var destroyctx  = destroy.getContext('2d');
-
-      showctx.font = '150pt Calibri';
-      showctx.fillStyle = 'black';
-      showctx.fillText('S', show.width/3, show.height);
-      editctx.font = '150pt Calibri';
-      editctx.fillStyle = 'black';
-      editctx.fillText('E', edit.width/3, edit.height);
-      destroyctx.font = '150pt Calibri';
-      destroyctx.fillStyle = 'black';
-      destroyctx.fillText('D', destroy.width/3, destroy.height);
-      show.onclick = function() {
-        window.location = "/decks/<%= deck.id %>";
-      }
-      edit.onclick = function() {
-        window.location = "/decks/<%= deck.id %>/edit";
-      }
-      destroy.onclick = function() {
-        //window.location = "/decks/<%=deck.id%>";
-        //<td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      }
+        window.decks = new Array();
+        "<% Deck.all.each do |d| %>"
+          window.decks.push("<%= d.id %>");
+        "<% end %>"
+    
     
       var card    = document.getElementById("card");
       var context = card.getContext('2d');
@@ -89,16 +69,11 @@
       context = canvas.getContext('2d');
 
       canvas.onclick = function() {
-
         // Start ruby code
-        window.decks = new Array();
-        "<% Deck.all.each do |d| %>"
-          window.decks.push("<%= d.id %>")
-        "<% end %>"
-
+ 
         "<% @fcs = deck.flashcards %>"
         window.current_deck_id = "<%= deck.id %>";
-
+        
         window.flashcards = new Array();
         "<% @fcs.each do |f| %>"
           window.flashcards.push("<%= f.front %>");
@@ -135,7 +110,7 @@
         var j = 0;
         for (var i = 0; i < window.decks.length; i++) {
           if (window.current_deck_id == window.decks[i]) {
-            $('#deck'+j).css('background-color', 'lightblue');              
+            $('#deck'+j).css('background-color', 'lightblue');
           } else {
             $('#deck'+j).css('background-color', 'white');
           }
@@ -144,11 +119,8 @@
       }
     </script>
 
-
-
     <% i+=1 %>
     <% end %>
-
 
 </div>
 
