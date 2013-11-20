@@ -8,18 +8,46 @@ $(document).ready(function() {
   addDeckMenus();
 });
 
-function linkListener() {
-    var element = $('#list' + this.i);
-    element.slideToggle();
-    event.preventDefault();
+function addDeckMenus () {
+  for (var i = 0; i < window.decks.length; ++i) {
+    var dropdown = document.getElementById("dropdown"+i);
+    dropdown.i = i;
+    dropdown.onclick = dropdownListener;
+
+    var show = document.getElementById("show"+i);
+    show.i = i;
+    show.onclick = showListener;
+/*
+    var edit = document.getElementById("edit"+i);
+    edit.i = i;
+    edit.onclick = editListener;
+
+    var destroy = document.getElementById("destroy"+i);
+    destroy.i = i;
+    destroy.onclick = destroyListener;
+*/
+  }
 }
 
-function addDeckMenus () {
-    for (var i = 0; i < window.decks.length; ++i) {
-        var link = document.getElementById("dropdown"+i);
-        link.i = i;
-        link.onclick = linkListener;
-    }
+function dropdownListener() {
+  var element = $('#list' + this.i);
+  element.slideToggle();
+  event.preventDefault();
+}
+
+function showListener() {
+  var element = $('#show' + this.i);
+  window.location = "/decks/"+i;
+}
+
+function editListener() {
+  var element = $('#edit' + this.i);
+  window.location = "/decks/"+i+"/edit";
+}
+
+function destroyListener() {
+  var element = $('#destroy' + this.i);
+  //window.location = "/decks/"+i;
 }
 
 function makeFlashcardCanvas() {

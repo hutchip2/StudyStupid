@@ -2,10 +2,6 @@
 <body>
   <br />
   <center><canvas id="card"></canvas></center>
-
-<a href="/" id="dropdown">V</a><div id="list" style="display: block; display: none;"><%=image_tag("show.png")%><br/><%=image_tag("edit.png")%><br/><%=image_tag("destroy.png")%><br/></div>
-
-
   <br />
 </body>
 <%= link_to 'New Deck', new_deck_path, :id => 'newDeck' %>
@@ -18,7 +14,7 @@
 
     <canvas class="decks"  id="deck<%= i %>"    style="left: <%= 220 * i %>px; z-index: -1;"></canvas>
 
-    <a href="/" class="dropdown" id="dropdown<%= i %>" style="position: absolute; left: <%= (220 * i)+20 %>px; top: 20px;">V</a><div class="list" id="list<%= i %>" style="display: block; display: none; position: absolute; left: <%= (220*i)+30 %>px; top: 20px;"><%=image_tag("show.png")%><br/><%=image_tag("edit.png")%><br/><%=image_tag("destroy.png")%><br/></div>
+    <a href="/" class="dropdown" id="dropdown<%= i %>" style="position: absolute; left: <%= (220 * i)+20 %>px; top: 0px;">+</a><div class="list" id="list<%= i %>" style="display: block; display: none; position: absolute; left: <%= (220*i)+20 %>px; top: 20px;"><%= image_tag("show.png", :class => 'show', :id => 'show'+i.to_s) %><br/><%=image_tag("edit.png", :class => 'edit')%><br/><%=image_tag("destroy.png", :class => 'destroy')%></div>
 
     <script>
         window.decks = new Array();

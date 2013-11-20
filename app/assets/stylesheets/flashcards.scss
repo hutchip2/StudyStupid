@@ -4,7 +4,15 @@
 
 .decks {
   position: absolute;
-  bottom: 8%;
+/* bottom: 8%; */
+  z-index: 0;
+  width: 200px;
+  height: width/2;
+  border: 1px solid #000000;
+  margin: 0em 1em 0em 1em;
+}
+
+.deckShow {
   z-index: 0;
   width: 200px;
   height: width/2;
@@ -13,37 +21,15 @@
 }
 
 .show, .edit, .destroy {
-  position: absolute; 
-  top: 70%; 
-  z-index: 1;
-  width: 2%;
-  height: width;
-  margin-left: 1%;
-  border: 1px solid #000000;
+  width: 20px;
 }
 
-.show {
-  margin-left: 1.5%;
-}
-
-.show:hover {
+.show:hover, .edit:hover, .destroy:hover {
   background-color: red;
 }
 
-.edit {
-  margin-left: 3.5%;
-}
-
-.edit:hover {
-  background-color: green;
-}
-
-.destroy {
-  margin-left: 5.5%;
-}
-
-.destroy:hover {
-  background-color: blue;
+.show {
+ width: 25px;
 }
 
 #showDeck {
@@ -55,29 +41,28 @@
 #newDeck {
   position: fixed;
   float: left;
-  bottom: 31%;
-  left: 1%;
-
+  bottom: 20%;
+  left: 2%;
 }
 
 #card {
-  position: fixed;
-  width: 50%;
+  width: 800px;
   height: width/2;
   border: 1px solid #000000;
-  left: 25%;
   top: 15%;
+  z-index: 0;
 }
 
 #decks_outer {
   position: fixed;
   height: 103px;
   width: 100%;
-  top: 70%;
+  bottom: 1%;
   white-space:nowrap;
   overflow: auto;
   overflow-y: hidden;
   -ms-overflow-y: hidden;
-  background-color: yellow;
-  padding-bottom: 2%;
+  /*background-color: yellow;*/
+  padding-bottom: 10px;
+  z-index: 0;
 }

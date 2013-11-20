@@ -8,36 +8,37 @@
 </head>
 
   <div id="header">
-  <% if current_page?(root_path) %>
-    <span id='greeting'>
-      <% if current_user != nil %>
-        Welcome, <%= current_user.first_name %>!
-      <% else %>
-        Sign in or create and account to begin!
-      <% end %>
-    </span>
-  <% end %><br/>
-
-  <%= link_to_if(account_signed_in?, 'Sign out', destroy_account_session_path, :method => :delete, :class => 'sign_in_out') { link_to('Sign in', new_account_session_path, :class => 'sign_in_out') } %>
+    <a href='/' id="title">StudyStupid</a>
+    <% if current_page?(root_path) %>
+      <span id='greeting'>
+        <% if current_user != nil %>
+          - Welcome, <%= current_user.first_name %>!
+        <% else %>
+          Sign in or create and account to begin!
+        <% end %>
+      </span>
+  <% end %>
   <br/>
-  <a id="flashcards" href="/flashcards">Flashcards</a>
-  <a id="accounts" class='notFirst' href="/admin/accounts">Account</a>
-  <br/><br/>
-  <hr>
-<%= flash_messages :p, :notice, :alert %>
+
+    <%= link_to_if(account_signed_in?, 'Sign out', destroy_account_session_path, :method => :delete, :id => 'sign_in_out') { link_to('Sign in', new_account_session_path, :class => 'sign_in_out') } %>
+  
+    <a id="flashcards" href="/flashcards">Flashcards</a>
+    <a id="accounts" class='notFirst' href="/admin/accounts">Account</a>
+    <br/><br/>
+
+    <%= flash_messages :p, :notice, :alert %>
 
   </div>
   <br/><br/><br/><br/>
+
 <body>
   <%= yield %>
-
 </body>
-
+<!--
 <footer>
-  <hr>
-  <%= link_to("About", "/about") %>
-  <%= link_to("Contact", "/contact") %>
-  <%= link_to("Help", "/help") %>
+  <%= link_to("About", "/about", :id => 'about') %>
+  <%= link_to("Contact", "/contact", :id => 'contact') %>
+  <%= link_to("Help", "/help", :id => 'help') %>
 </footer>
-
+-->
 </html>

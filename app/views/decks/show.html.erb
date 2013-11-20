@@ -1,5 +1,28 @@
 <p id="notice"><%= notice %></p>
+<center>
+<canvas id='deckShow<%= @deck.id %>' class="deckShow"></canvas><br/>
+<%= link_to 'Edit', edit_deck_path(@deck) %> | <%= link_to 'Back', flashcards_path %>
+</center>
 
-
-<%= link_to 'Edit', edit_deck_path(@deck) %> |
-<%= link_to 'Back', decks_path %>
+<script>
+  var canvas  = document.getElementById("deckShow<%=@deck.id%>");
+  var context = canvas.getContext('2d');
+  var x = canvas.width / 3;
+  var y = canvas.height / 2;
+  context.lineWidth = 1;
+  for (var i = 1; i < 10; i++) {
+    context.beginPath();
+    context.moveTo(0,15*i);
+    context.lineTo(300,15*i);
+    if (i == 1) {
+      context.strokeStyle = '#c6757e';
+    } else {
+      context.strokeStyle = '#a0d6dd';
+    }
+    context.stroke();
+  }
+  var title = "<%= @deck.title %>";
+  context.font = '20pt Calibri';
+  context.fillStyle = 'blue';
+  context.fillText(title, x, y);
+</script>
