@@ -7,86 +7,56 @@
 <%= link_to 'New Deck', new_deck_path, :id => 'newDeck' %>
 <br /><br />
 
+<script>
+  window.deck = new Array();
+  var a = 0;
+"<% @decks.each do |deck| %>"
+    window.deck[a] = new Array();
+    window.deck[a]['ID']    = "<%= deck.id %>";
+    window.deck[a]['title'] = "<%= deck.title %>";
+    a++;
+"<% end %>"
+</script>
+
 <div id="decks_outer">
   <% current_card_id = 1%>
-  <% i = 0 %>  
+  <% i = 0 %>
   <% @decks.each do |deck| %>
 
-    <canvas class="decks"  id="deck<%= i %>"    style="left: <%= 220 * i %>px; z-index: -1;"></canvas>
+    <canvas class="decks"  id="deck<%= i %>"    style="left: <%= 220 * i %>px;"></canvas>
 
     <a href="/" class="dropdown" id="dropdown<%= i %>" style="position: absolute; left: <%= (220 * i)+20 %>px; top: 0px;">+</a><div class="list" id="list<%= i %>" style="display: block; display: none; position: absolute; left: <%= (220*i)+20 %>px; top: 20px;"><%= image_tag("show.png", :class => 'show', :id => 'show'+i.to_s) %><br/><%=image_tag("edit.png", :class => 'edit')%><br/><%=image_tag("destroy.png", :class => 'destroy')%></div>
 
     <script>
-        window.decks = new Array();
-        "<% Deck.all.each do |d| %>"
-          window.decks.push("<%= d.id %>");
-        "<% end %>"
-    
-    
-      var card    = document.getElementById("card");
-      var context = card.getContext('2d');
 
-      context.lineWidth = 1;
-      for (var i = 1; i < 10; i++) {
-        context.beginPath();
-        context.moveTo(0,15*i);
-        context.lineTo(300,15*i);
-        if (i == 1) {
-          context.strokeStyle = '#c6757e';
-        } else {
-          context.strokeStyle = '#a0d6dd';
-        }
-        context.stroke();
-      }
-
-      var canvas  = document.getElementById("deck<%= i %>");
-      var context = canvas.getContext('2d');
-      var x = canvas.width / 3;
-      var y = canvas.height / 2;
-      context.lineWidth = 1;
-      for (var i = 1; i < 10; i++) {
-        context.beginPath();
-        context.moveTo(0,15*i);
-        context.lineTo(300,15*i);
-        if (i == 1) {
-          context.strokeStyle = '#c6757e';
-        } else {
-          context.strokeStyle = '#a0d6dd';
-        }
-        context.stroke();
-      }
-      var title = "<%= deck.title %>";
-      context.font = '20pt Calibri';
-      context.fillStyle = 'blue';
-      context.fillText(title, x, y);
-      //context.fillText('S  E  D', x-80, y+60);
+      // # deck ==> [id, title, [flashcards]]
+      //                              ^
+      //                             ||=========>[id, front, back]
 
       canvas  = document.getElementById("deck<%= i %>");
       context = canvas.getContext('2d');
-
       canvas.onclick = function() {
-        // Start ruby code
- 
         "<% @fcs = deck.flashcards %>"
         window.current_deck_id = "<%= deck.id %>";
-        
         window.flashcards = new Array();
         "<% @fcs.each do |f| %>"
           window.flashcards.push("<%= f.front %>");
           window.flashcards.push("<%= f.back %>");
         "<% end %>"
         // End ruby code
-
-        var curCard;
-        if (window.flashcards.length == 0) {
-          curCard = "<empty>";
-        } else {
-          curCard = window.flashcards[0];
-        }
         var cardCanvas = document.getElementById("card");
         cardCanvas.width = cardCanvas.width;
         var cardContext = cardCanvas.getContext('2d');
-        cardContext.lineWidth = 2;
+        
+        var curCard;
+        if (window.flashcards.length == 0) {
+          curCard = "";
+          cardContext.lineWidth = 1;
+        } else {
+          curCard = window.flashcards[0];
+          cardContext.lineWidth = 2;
+        }
+       
         for (var i = 1; i < 10; i++) {
           cardContext.beginPath();
           cardContext.moveTo(0,15*i);
@@ -104,8 +74,8 @@
         cardContext.fillStyle = 'blue';
         cardContext.fillText(curCard, x, y);
         var j = 0;
-        for (var i = 0; i < window.decks.length; i++) {
-          if (window.current_deck_id == window.decks[i]) {
+        for (var i = 0; i < window.deck.length; i++) {
+          if (window.current_deck_id == window.deck[i].ID) {
             $('#deck'+j).css('background-color', 'lightblue');
           } else {
             $('#deck'+j).css('background-color', 'white');

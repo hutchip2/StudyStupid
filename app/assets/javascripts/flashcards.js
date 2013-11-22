@@ -5,11 +5,11 @@
 $(document).ready(function() {
   makeFlashcardCanvas();
   flipFlashcard();
-  addDeckMenus();
+  buildDecks();
 });
 
-function addDeckMenus () {
-  for (var i = 0; i < window.decks.length; ++i) {
+function buildDecks () {
+  for (var i = 0; i < window.deck.length; ++i) {
     var dropdown = document.getElementById("dropdown"+i);
     dropdown.i = i;
     dropdown.onclick = dropdownListener;
@@ -26,6 +26,27 @@ function addDeckMenus () {
     destroy.i = i;
     destroy.onclick = destroyListener;
 */
+    var canvas  = document.getElementById("deck"+i);
+    var context = canvas.getContext('2d');
+    var x = canvas.width / 3;
+    var y = canvas.height / 2;
+    context.lineWidth = 1;
+    for (var j = 1; j < 10; j++) {
+      context.beginPath();
+      context.moveTo(0,15*j);
+      context.lineTo(300,15*j);
+      if (j == 1) {
+        context.strokeStyle = '#c6757e';
+      } else {
+        context.strokeStyle = '#a0d6dd';
+      }
+      context.stroke();
+    }
+    var title = window.deck[i].title;
+    context.font = '20pt Calibri';
+    context.fillStyle = 'blue';
+    context.fillText(title, x, y);
+
   }
 }
 
@@ -55,11 +76,18 @@ function makeFlashcardCanvas() {
   window.current_card = 0;
   var canvas = document.getElementById("card");
   var context = canvas.getContext('2d');
-  var x = canvas.width / 3;
-  var y = canvas.height / 2;
-  context.font = '20pt Calibri';
-  context.fillStyle = 'blue';
-  context.fillText("Flashcards", x, y);
+  context.lineWidth = 1;
+  for (var i = 1; i < 10; i++) {
+    context.beginPath();
+    context.moveTo(0,15*i);
+    context.lineTo(300,15*i);
+    if (i == 1) {
+      context.strokeStyle = '#c6757e';
+    } else {
+      context.strokeStyle = '#a0d6dd';
+    }
+    context.stroke();
+  }
 }
 
 function flipFlashcard() {

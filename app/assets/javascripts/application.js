@@ -13,3 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+// # deck ==> flashcards ==> [ids, titles, fronts, backs]
