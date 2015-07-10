@@ -20,7 +20,7 @@
   <% end %>
   <br/>
 
-    <%= link_to_if(account_signed_in?, 'Sign out', destroy_account_session_path, :method => :delete, :id => 'sign_in_out') { link_to('Sign in', new_account_session_path, :class => 'sign_in_out') } %>
+    <%= link_to_if(account_signed_in?, 'Sign out', destroy_account_session_path, :method => :delete, :id => 'sign_out', :class => 'sign_in_out') { link_to('Sign in', new_account_session_path, :id => 'sign_in', :class => 'sign_in_out') } %>
   
     <a id="flashcards" href="/flashcards">Flashcards</a>
     <a id="accounts" class='notFirst' href="/admin/accounts">Account</a>

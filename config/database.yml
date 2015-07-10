@@ -16,6 +16,7 @@ development:
   pool: 5
   username: root
   password:
+  socket: /opt/local/var/run/mariadb-10.0/mysqld.sock
   host: localhost
 
 # Warning: The database defined as "test" will be erased and

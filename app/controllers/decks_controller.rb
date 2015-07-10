@@ -1,6 +1,6 @@
 class DecksController < ApplicationController
-
-  def list
+  before_filter :authenticate_account!
+  def index
     @decks = Deck.find(:all)
   end
 
@@ -16,7 +16,7 @@ class DecksController < ApplicationController
   def create
     @deck = Deck.new(params[:deck])
     if @deck.save
-      redirect_to :action => 'list'
+      redirect_to :action => 'index'
     else
       #@subjects = Subject.find(:all)
       render :action => 'new'
@@ -40,7 +40,7 @@ class DecksController < ApplicationController
 
   def destroy
     Deck.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => 'index'
   end
 
 end

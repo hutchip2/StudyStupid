@@ -99,7 +99,7 @@ function flipFlashcard() {
       }
       var curCard = window.flashcards[window.current_card];
       if (window.flashcards.length == 0)  {
-        curCard = "<empty>";
+        curCard = "<deck is empty>";
       }
       var canvas = document.getElementById("card");
       canvas.width = canvas.width;

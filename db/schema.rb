@@ -65,26 +65,4 @@ ActiveRecord::Schema.define(:version => 20130628204216) do
 
   add_index "flashcards", ["deck_id"], :name => "index_flashcards_on_deck_id"
 
-  create_table "identities", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "name"
-    t.string   "nickname"
-    t.string   "image"
-    t.string   "url"
-    t.string   "location"
-    t.string   "locale"
-    t.string   "time_zone"
-    t.integer  "account_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "identities", ["account_id"], :name => "index_identities_on_account_id"
-  add_index "identities", ["provider", "account_id"], :name => "index_identities_on_provider_and_account_id", :unique => true
-  add_index "identities", ["provider", "uid"], :name => "index_identities_on_provider_and_uid", :unique => true
-
 end

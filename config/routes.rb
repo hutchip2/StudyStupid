@@ -1,7 +1,7 @@
 Studystupid::Application.routes.draw do
 
   resources :decks
-
+  #match 'decks#list', :as => 'decks#index'
 
   resources :flashcards
 

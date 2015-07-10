@@ -11,21 +11,15 @@ gem 'jquery-rails',           '2.3.0'
 
 # Authentication
 gem 'devise',                 '2.1.2'
-gem 'omniauth-ldap',          '1.0.2'
-gem 'omniauth-google-oauth2', '0.1.13'
-gem 'omniauth-facebook',      '1.4.1'
 
 # Authorization
 gem 'activeadmin', '0.6.0'
 gem 'cancan',      '1.6.9'
 
 # Misc.
-#gem 'carmen-rails', '~> 1.0.0.beta3'
-gem 'carmen-rails', :git => 'https://github.com/jim/carmen-rails.git'
-gem 'awesome_nested_set',              '~> 2.1.6'
-gem 'active_admin-awesome_nested_set', '~> 0.0.5'
-gem 'nested_form',                     '~> 0.3.2'
-gem 'nokogiri',                        '~> 1.5.9'
+#gem 'awesome_nested_set',              '~> 2.1.6'
+#gem 'active_admin-awesome_nested_set', '~> 0.0.5'
+#gem 'nested_form',                     '~> 0.3.2'
 
 # Gems used only for assets and not required
 # in production environments by default.

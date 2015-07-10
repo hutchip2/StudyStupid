@@ -12,11 +12,11 @@
  *= require_tree .
  */
 
-#sign_in_out {
-   float:right;
-   margin-right: 10%;
-   margin-top: -12px;
-   color: white;
+#sign_in, #sign_out {
+  float: left;
+  margin-left: 10px;
+  margin-top: -12px;
+  color: white;
 }
 
 #greeting {
@@ -31,19 +31,18 @@
 }
 
 #flashcards, #accounts {
-  float: right;
+  float: left;
+
   color: white;
-  float: right;
   margin-top: -12px;
 }
 
 #flashcards {
-  margin-right: 80px;
-  margin-left: -200px;
+  margin-left: 20%;
 }
 
 #accounts {
-  margin-right: 160px;
+  margin-left: 10px;
 }
 
 #header {

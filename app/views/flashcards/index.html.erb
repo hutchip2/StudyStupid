@@ -2,9 +2,11 @@
 <body>
   <br />
   <center><canvas id="card"></canvas></center>
+  <center>Select a deck below, and press the [space] key to cycle through flashcards</center>
   <br />
 </body>
-<%= link_to 'New Deck', new_deck_path, :id => 'newDeck' %>
+<%= link_to 'New Deck', new_deck_path, :id => 'newDeck' %><br />
+<%= link_to 'Add flashcards to deck', new_flashcard_path, :id => 'newFlashcard' %>
 <br /><br />
 
 <script>
@@ -28,11 +30,6 @@
     <a href="/" class="dropdown" id="dropdown<%= i %>" style="position: absolute; left: <%= (220 * i)+20 %>px; top: 0px;">+</a><div class="list" id="list<%= i %>" style="display: block; display: none; position: absolute; left: <%= (220*i)+20 %>px; top: 20px;"><%= image_tag("show.png", :class => 'show', :id => 'show'+i.to_s) %><br/><%=image_tag("edit.png", :class => 'edit')%><br/><%=image_tag("destroy.png", :class => 'destroy')%></div>
 
     <script>
-
-      // # deck ==> [id, title, [flashcards]]
-      //                              ^
-      //                             ||=========>[id, front, back]
-
       canvas  = document.getElementById("deck<%= i %>");
       context = canvas.getContext('2d');
       canvas.onclick = function() {

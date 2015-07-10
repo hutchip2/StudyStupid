@@ -14,6 +14,7 @@
 
 Front: <%= f.text_field :front %><br />
  Back: <%= f.text_field :back  %><br />
+ Deck: <%= f.collection_select(:deck_id, Deck.all, :id, :title) %><%#= f.select("deck_id", Deck.all.collect {|d| [ d.title ] }, {}) %>
 
   <div class="actions">
     <%= f.submit %>

@@ -5,10 +5,12 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @decks.each do |deck| %>
   <tr>
+    <td><%= deck.title %></td>
     <td><%= link_to 'Show', deck %></td>
     <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
     <td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -17,5 +19,7 @@
 </table>
 
 <br />
+
+<%= link_to 'Add flashcards to deck', new_flashcard_path %><br />
 
 <%= link_to 'New Deck', new_deck_path %>
